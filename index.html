@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rania Hakimi</title>
+<meta name="description" content="Rania Hakimi — backend engineer interested in AI.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233D46F0'/%3E%3Ctext x='32' y='45' font-family='Arial,Helvetica,sans-serif' font-size='32' font-weight='800' letter-spacing='-2' fill='white' text-anchor='middle'%3ERH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFBFC;
+    --ink:#15171C;
+    --muted:#61656E;
+    --line:#E5E6EA;
+    --line-soft:#EFEFF2;
+    --accent:#3D46F0;
+    --accent-deep:#2A31C4;
+    --bar:rgba(251,251,252,0.78);
+    color-scheme: light dark;
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme: dark){
+      --paper:#0D0E11;
+      --ink:#ECEDEF;
+      --muted:#9A9EA8;
+      --line:#232530;
+      --line-soft:#1B1D25;
+      --accent:#7C83FF;
+      --accent-deep:#9AA0FF;
+      --bar:rgba(13,14,17,0.72);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0D0E11;
+    --ink:#ECEDEF;
+    --muted:#9A9EA8;
+    --line:#232530;
+    --line-soft:#1B1D25;
+    --accent:#7C83FF;
+    --accent-deep:#9AA0FF;
+    --bar:rgba(13,14,17,0.72);
+  }
+
+  *{box-sizing:border-box;}
+  :root{
+    box-sizing:border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html{
+    scroll-behavior:smooth;
+    scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 76px);
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader", Georgia, serif;
+    font-size:19px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .wrap{
+    width:100%;
+    max-width:760px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Sticky header / brand ---------- */
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:saturate(180%) blur(12px);
+    -webkit-backdrop-filter:saturate(180%) blur(12px);
+    background:var(--bar);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .bar-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:64px;
+    gap:16px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .mark{
+    width:38px;height:38px;
+    border-radius:11px;
+    background:var(--accent);
+    color:#fff;
+    font-family:"Archivo", system-ui, sans-serif;
+    font-weight:900;
+    font-size:16px;
+    letter-spacing:-0.06em;
+    display:grid;
+    place-items:center;
+    flex-shrink:0;
+    box-shadow:0 2px 10px color-mix(in srgb, var(--accent) 30%, transparent);
+    transition:transform .2s ease;
+  }
+  .brand:hover .mark{transform:rotate(-4deg) scale(1.05);}
+  .brand-name{
+    font-family:"Archivo", system-ui, sans-serif;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:-0.01em;
+  }
+  .topnav{display:flex; gap:22px;}
+  .topnav a{
+    font-family:"Archivo", system-ui, sans-serif;
+    font-size:14px;
+    font-weight:600;
+    color:var(--muted);
+    text-decoration:none;
+    transition:color .18s ease;
+  }
+  .topnav a:hover,.topnav a:focus-visible{color:var(--accent); outline:none;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:11vh 0 8vh;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-meta{
+    font-family:"Archivo", system-ui, sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    color:var(--muted);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:34px;
+  }
+  .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--accent);
+    display:inline-block;
+    box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+  .name{
+    font-family:"Archivo", system-ui, sans-serif;
+    font-weight:900;
+    font-size:clamp(3rem, 11vw, 6.6rem);
+    line-height:0.94;
+    letter-spacing:-0.03em;
+    margin:0 0 22px;
+  }
+  .name span{display:inline-block;}
+  .tagline{
+    font-family:"Archivo", system-ui, sans-serif;
+    font-weight:600;
+    font-size:clamp(1.1rem, 3.4vw, 1.5rem);
+    letter-spacing:-0.01em;
+    margin:0 0 26px;
+    color:var(--ink);
+  }
+  .lede{
+    max-width:54ch;
+    margin:0 0 34px;
+    color:var(--muted);
+    font-size:1.12rem;
+  }
+
+  .links{display:flex; flex-wrap:wrap; gap:12px 10px;}
+  .links a{
+    font-family:"Archivo", system-ui, sans-serif;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.01em;
+    text-decoration:none;
+    color:var(--ink);
+    padding:9px 16px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    transition:border-color .18s ease, color .18s ease, background .18s ease;
+  }
+  .links a:hover,.links a:focus-visible{border-color:var(--accent); color:var(--accent); outline:none;}
+  .links a.primary{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .links a.primary:hover,.links a.primary:focus-visible{background:var(--accent-deep); border-color:var(--accent-deep); color:#fff;}
+
+  /* ---------- Sections ---------- */
+  section{padding:7vh 0; border-bottom:1px solid var(--line-soft);}
+  h2{
+    font-family:"Archivo", system-ui, sans-serif;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:0.04em;
+    color:var(--muted);
+    margin:0 0 26px;
+  }
+  section p{margin:0 0 1rem;}
+  section p:last-child{margin-bottom:0;}
+  .about p{font-size:1.18rem; max-width:60ch;}
+
+  .focus-list{list-style:none; margin:0; padding:0; display:grid; gap:2px;}
+  .focus-list li{padding:18px 0; border-top:1px solid var(--line-soft);}
+  .focus-list li:first-child{border-top:none;}
+  .focus-list h3{
+    font-family:"Archivo", system-ui, sans-serif;
+    font-weight:700;
+    font-size:1.15rem;
+    letter-spacing:-0.01em;
+    margin:0 0 4px;
+    color:var(--ink);
+  }
+  .focus-list p{color:var(--muted); font-size:1rem; margin:0;}
+
+  .work-list{list-style:none; margin:0; padding:0;}
+  .work-list li{border-top:1px solid var(--line-soft);}
+  .work-list li:first-child{border-top:none;}
+  .work-list a{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:20px;
+    padding:22px 0;
+    text-decoration:none;
+    color:var(--ink);
+    transition:padding-left .2s ease;
+  }
+  .work-list a:hover{padding-left:8px;}
+  .work-list .w-title{
+    font-family:"Archivo", system-ui, sans-serif;
+    font-weight:700;
+    font-size:1.2rem;
+    letter-spacing:-0.01em;
+  }
+  .work-list .w-desc{color:var(--muted); font-size:1rem; display:block; margin-top:4px; font-weight:400;}
+  .work-list .w-year{
+    font-family:"Archivo", system-ui, sans-serif;
+    font-size:13px; font-weight:600;
+    color:var(--muted);
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+
+  footer{
+    padding:6vh 0 8vh;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    font-family:"Archivo", system-ui, sans-serif;
+    font-size:13px;
+    color:var(--muted);
+  }
+  footer .foot-links{display:flex; gap:18px; flex-wrap:wrap;}
+  footer a{color:var(--muted); text-decoration:none; transition:color .18s ease;}
+  footer a:hover{color:var(--accent);}
+
+  @media (prefers-reduced-motion: no-preference){
+    .name span{
+      opacity:0;
+      transform:translateY(0.35em);
+      animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    .name span:nth-child(2){animation-delay:.08s;}
+    @keyframes rise{to{opacity:1; transform:translateY(0);}}
+    .fade{opacity:0; animation:soft .8s ease forwards .25s;}
+    @keyframes soft{to{opacity:1;}}
+  }
+
+  @media (max-width:560px){
+    body{font-size:18px;}
+    .topnav{gap:16px;}
+    .topnav a:nth-child(3){display:none;}
+    .brand-name{display:none;}
+    .work-list a{flex-direction:column; gap:6px;}
+  }
+</style>
+</head>
+<body id="top">
+
+  <header class="topbar">
+    <div class="wrap bar-inner">
+      <a href="#top" class="brand" aria-label="Rania Hakimi — home">
+        <span class="mark" aria-hidden="true">RH</span>
+        <span class="brand-name">Rania Hakimi</span>
+      </a>
+      <nav class="topnav">
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
+        <a href="#work">Work</a>
+        <!-- EDIT: your email -->
+        <a href="mailto:you@example.com">Email</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <!-- EDIT: status line -->
+      <div class="hero-meta fade"><span class="dot"></span> Backend engineer · AI systems · Open to opportunities</div>
+
+      <h1 class="name"><span>Rania</span> <span>Hakimi</span></h1>
+
+      <!-- EDIT: tagline -->
+      <p class="tagline fade">Backend engineer interested in AI.</p>
+
+      <!-- EDIT: one or two sentence intro -->
+      <p class="lede fade">I build the systems behind the product — APIs, services, and data
+      pipelines — with a growing focus on machine-learning infrastructure. I care about
+      backends that stay fast, reliable, and simple as they scale.</p>
+
+      <!-- EDIT: replace with your real links -->
+      <nav class="links fade">
+        <a class="primary" href="mailto:you@example.com">Email me</a>
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+    </div>
+  </section>
+
+  <main>
+    <section class="about wrap" id="about">
+      <h2>About</h2>
+      <!-- EDIT: your story -->
+      <p>I'm a backend engineer. I like the load-bearing parts of software — the APIs,
+      services, and data flows that everything else depends on. My interest in AI is
+      practical: I'm drawn to the engineering that gets models out of notebooks and into
+      dependable production systems.</p>
+      <p>I gravitate toward problems that are equal parts technical and structural — making
+      a service faster, a pipeline more resilient, or a complex system easier to reason about.</p>
+    </section>
+
+    <section class="wrap" id="focus">
+      <h2>Focus</h2>
+      <!-- EDIT: your areas of interest -->
+      <ul class="focus-list">
+        <li>
+          <h3>Backend &amp; distributed systems</h3>
+          <p>APIs, services, and the reliable core that everything else runs on.</p>
+        </li>
+        <li>
+          <h3>ML infrastructure &amp; serving</h3>
+          <p>Getting models into production — pipelines, deployment, and serving at scale.</p>
+        </li>
+        <li>
+          <h3>Data engineering</h3>
+          <p>The pipelines, stores, and flows that feed applications and models.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="wrap" id="work">
+      <h2>Selected work</h2>
+      <!-- EDIT: replace with real projects, or delete entries you don't need -->
+      <ul class="work-list">
+        <li>
+          <a href="#" target="_blank" rel="noopener">
+            <span>
+              <span class="w-title">Project one</span>
+              <span class="w-desc">A short line describing what it does and why it mattered.</span>
+            </span>
+            <span class="w-year">2025</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" target="_blank" rel="noopener">
+            <span>
+              <span class="w-title">Project two</span>
+              <span class="w-desc">One sentence on the problem, your approach, and the result.</span>
+            </span>
+            <span class="w-year">2024</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" target="_blank" rel="noopener">
+            <span>
+              <span class="w-title">Project three</span>
+              <span class="w-desc">Something you're proud of — a service, a tool, a side project.</span>
+            </span>
+            <span class="w-year">2024</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div>© <span id="yr"></span> Rania Hakimi</div>
+    <div class="foot-links">
+      <a href="mailto:you@example.com">Email</a>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
