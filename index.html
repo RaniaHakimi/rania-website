@@ -275,6 +275,25 @@ footer a:hover { color: var(--accent); }
   .currently dt { margin-top: 12px; }
   .currently dt:first-child { margin-top: 0; }
 }
+
+/* ── Dark mode toggle ── */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--faint);
+  border-radius: 2px;
+  padding: 4px 10px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.02em;
+}
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
 </style>
 
 <header>
@@ -282,6 +301,7 @@ footer a:hover { color: var(--accent); }
   <nav>
     <a href="#about">About</a>
     <a href="https://www.linkedin.com/in/rania-hakimi/" target="_blank" rel="noopener">LinkedIn</a>
+    <button class="theme-toggle" aria-label="Toggle dark mode">Light</button>
   </nav>
 </header>
 
@@ -323,4 +343,27 @@ footer a:hover { color: var(--accent); }
 
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Dark mode toggle
+  const toggle = document.querySelector('.theme-toggle');
+  const root = document.documentElement;
+
+  function getPreferred() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function apply(theme) {
+    root.setAttribute('data-theme', theme);
+    toggle.textContent = theme === 'dark' ? 'Light' : 'Dark';
+  }
+
+  apply(getPreferred());
+
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', next);
+    apply(next);
+  });
 </script>
